@@ -1,18 +1,10 @@
 package bo.edu.ucb.sistemagraduados.controller;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import bo.edu.ucb.sistemagraduados.entity.Persona;
+import bo.edu.ucb.sistemagraduados.dto.PersonaDto;
 import bo.edu.ucb.sistemagraduados.service.PersonaService;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/persona")
@@ -20,17 +12,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class PersonaController {
 
     @Autowired
-    PersonaService personaService;
+    private PersonaService personaService;
 
     @GetMapping("/getPersona/{id}")
-    public Persona getPersonaById (Integer id) {
-        return personaService.findById(id);
+    public ResponseEntity<PersonaDto> getPersonaById(@PathVariable Integer id) {
+        PersonaDto personaDto = personaService.findById(id);
+        if (personaDto == null) {
+            return ResponseEntity.notFound().build();
         }
-    
-    @PostMapping("/savePersona")
-    @ResponseBody
-    public void savePersona(@RequestBody Persona persona) {
-        personaService.guardarPersona(persona);
+        return ResponseEntity.ok(personaDto);
     }
 
+    @PostMapping("/savePersona")
+    public ResponseEntity<PersonaDto> savePersona(@RequestBody PersonaDto personaDto) {
+        PersonaDto savedPersonaDto = personaService.save(personaDto);
+        return ResponseEntity.ok(savedPersonaDto);
+    }
 }

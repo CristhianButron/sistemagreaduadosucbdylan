@@ -4,43 +4,33 @@ import java.util.List;
 import java.util.ArrayList;
 
 import bo.edu.ucb.sistemagraduados.dto.UsuarioDto;
-import bo.edu.ucb.sistemagraduados.entity.Persona;
+import bo.edu.ucb.sistemagraduados.entity.Carreras;
 import bo.edu.ucb.sistemagraduados.entity.Usuario;
 
 public class UsuarioMapper {
     public static UsuarioDto toUsuarioDto(Usuario usuario) {
         UsuarioDto usuarioDto = new UsuarioDto();
-        usuarioDto.setIdUsuario(usuario.getIdUsuario());
         usuarioDto.setCorreoinstitucional(usuario.getCorreoInstitucional());
         usuarioDto.setContrasenha(usuario.getContrasenha());
         usuarioDto.setCargo(usuario.getCargo());
-        usuarioDto.setNombre(usuario.getPersonaIdPersona().getNombre());
-        usuarioDto.setApaterno(usuario.getPersonaIdPersona().getAPaterno());
-        usuarioDto.setAmaterno(usuario.getPersonaIdPersona().getAMaterno());
-        usuarioDto.setCi(usuario.getPersonaIdPersona().getCi());
-        usuarioDto.setFechaNacimiento(usuario.getPersonaIdPersona().getFechaNacimiento());
-        usuarioDto.setGenero(usuario.getPersonaIdPersona().getGeneroNacimiento());
-        usuarioDto.setNacionalidad(usuario.getPersonaIdPersona().getNacionalidad());
+
+        usuarioDto.setPersonaDto(PersonaMapper.toPersonaDto(usuario.getPersonaIdPersona()));
+
+        usuarioDto.setCarrera_id_carrera(usuario.getCarrerasIdCarrera().getIdCarrera());
         return usuarioDto;
     }
 
     public static Usuario toUsuario(UsuarioDto usuarioDto) {
         Usuario usuario = new Usuario();
-        usuario.setIdUsuario(usuarioDto.getIdUsuario());
         usuario.setCorreoInstitucional(usuarioDto.getCorreoinstitucional());
         usuario.setContrasenha(usuarioDto.getContrasenha());
         usuario.setCargo(usuarioDto.getCargo());
         
-        Persona persona = new Persona();
-        persona.setNombre(usuarioDto.getNombre());
-        persona.setAPaterno(usuarioDto.getApaterno());
-        persona.setAMaterno(usuarioDto.getAmaterno());
-        persona.setCi(usuarioDto.getCi());
-        persona.setFechaNacimiento(usuarioDto.getFechaNacimiento());
-        persona.setGeneroNacimiento(usuarioDto.getGenero());
-        persona.setNacionalidad(usuarioDto.getNacionalidad());
+        usuario.setPersonaIdPersona(PersonaMapper.toPersona(usuarioDto.getPersonaDto()));
 
-        usuario.setPersonaIdPersona(persona);
+        Carreras carrera = new Carreras();
+        carrera.setIdCarrera(usuarioDto.getCarrera_id_carrera());
+        usuario.setCarrerasIdCarrera(carrera);
         
         return usuario;
     }
