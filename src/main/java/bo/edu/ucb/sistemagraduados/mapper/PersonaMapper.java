@@ -6,6 +6,7 @@ import bo.edu.ucb.sistemagraduados.entity.Persona;
 public class PersonaMapper {
     public static PersonaDto toPersonaDto (Persona persona) {
         PersonaDto personaDto = new PersonaDto();
+        personaDto.setIdPersona(persona.getIdPersona());
         personaDto.setNombre(persona.getNombre());
         personaDto.setAPaterno(persona.getAPaterno());
         personaDto.setAMaterno(persona.getAMaterno());

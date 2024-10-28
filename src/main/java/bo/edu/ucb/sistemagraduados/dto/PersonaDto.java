@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class PersonaDto {
+    private Integer idPersona;
     private String aPaterno;
     private String aMaterno;
     private String nombre;
