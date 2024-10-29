@@ -27,7 +27,7 @@ public class UsuarioController {
 
     @GetMapping("/getUsuarios/{id}")
     @ResponseBody
-    public UsuarioDto getUsuarioById(Integer id) {
+    public UsuarioDto getUsuarioById(@PathVariable Integer id) {
         return usuarioService.findById(id);
     }
 
@@ -36,6 +36,21 @@ public class UsuarioController {
     public ResponseEntity<UsuarioDto> saveUsuario(@RequestBody UsuarioDto usuarioDto) {
         UsuarioDto savedUsuarioDto = usuarioService.save(usuarioDto);
         return ResponseEntity.ok(savedUsuarioDto);
+    }
+
+    @PutMapping("/putUsuarios/{id}")
+    @ResponseBody
+    public ResponseEntity<UsuarioDto> updateUsuario(@PathVariable Integer id, @RequestBody UsuarioDto usuarioDto) {
+        usuarioDto.setIdUsuario(id);
+        UsuarioDto updatedUsuarioDto = usuarioService.update(id, usuarioDto);
+        return ResponseEntity.ok(updatedUsuarioDto);
+    }
+
+    @DeleteMapping("/deleteUsuarios/{id}")
+    @ResponseBody
+    public ResponseEntity<String> deleteUsuario(@PathVariable Integer id) {
+        usuarioService.delete(id);
+        return ResponseEntity.ok("Usuario eliminado");
     }
 
 

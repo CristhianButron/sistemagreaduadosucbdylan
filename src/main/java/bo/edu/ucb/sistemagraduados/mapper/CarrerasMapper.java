@@ -2,6 +2,9 @@ package bo.edu.ucb.sistemagraduados.mapper;
 
 import bo.edu.ucb.sistemagraduados.entity.Carreras;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bo.edu.ucb.sistemagraduados.dto.CarrerasDto;
 
 public class CarrerasMapper {
@@ -17,5 +20,13 @@ public class CarrerasMapper {
         carreras.setNombre(carrerasDto.getNombre());
         carreras.setSigla(carrerasDto.getSigla());
         return carreras;
+    }
+
+    public static List<CarrerasDto> toCarrerasDtoList(List<Carreras> carreras) {
+        List<CarrerasDto> carrerasDtos = new ArrayList<>();
+        for(Carreras carrera : carreras) {
+            carrerasDtos.add(toCarrerasDto(carrera));
+        }
+        return carrerasDtos;
     }
 }

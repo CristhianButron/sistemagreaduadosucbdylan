@@ -2,9 +2,14 @@ package bo.edu.ucb.sistemagraduados.controller;
 
 import bo.edu.ucb.sistemagraduados.dto.CarrerasDto;
 import bo.edu.ucb.sistemagraduados.service.CarrerasService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("/api/v1/carreras")
@@ -23,6 +28,11 @@ public class CarrerasController {
         return ResponseEntity.ok(carrerasDto);
     }
 
+    @GetMapping("/getCarreras")
+    public ResponseEntity<List<CarrerasDto>> listaCarreras() {
+        return ResponseEntity.ok(carrerasService.findAll());
+    }
+    
     @PostMapping("/saveCarrera")
     public ResponseEntity<CarrerasDto> savePersona(@RequestBody CarrerasDto carrerasDto) {
         CarrerasDto savedCarrerasDto = carrerasService.save(carrerasDto);

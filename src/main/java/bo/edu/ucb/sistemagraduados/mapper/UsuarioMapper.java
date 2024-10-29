@@ -10,6 +10,7 @@ import bo.edu.ucb.sistemagraduados.entity.Usuario;
 public class UsuarioMapper {
     public static UsuarioDto toUsuarioDto(Usuario usuario) {
         UsuarioDto usuarioDto = new UsuarioDto();
+        usuarioDto.setIdUsuario(usuario.getIdUsuario());
         usuarioDto.setCorreoinstitucional(usuario.getCorreoInstitucional());
         usuarioDto.setContrasenha(usuario.getContrasenha());
         usuarioDto.setCargo(usuario.getCargo());
