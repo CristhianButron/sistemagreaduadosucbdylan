@@ -50,7 +50,7 @@ public class UsuarioController {
     @ResponseBody
     public ResponseEntity<String> deleteUsuario(@PathVariable Integer id) {
         usuarioService.delete(id);
-        return ResponseEntity.ok("Usuario eliminado");
+        return ResponseEntity.ok("Usuario eliminado correctamente");
     }
 
 

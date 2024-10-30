@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/usuario")
+@RequestMapping("/api/v1/estudiantes")
 @CrossOrigin(origins = "*")
 public class EstudiantesController {
 
@@ -28,19 +28,19 @@ public class EstudiantesController {
     public EstudiantesDto getEstudianteById(@PathVariable Integer id) {
         return estudiantesService.findById(id);
     }
-
-    @PostMapping("/postUsuarios")
+    
+    @PostMapping("/postEstudiantes")
     @ResponseBody
     public ResponseEntity<EstudiantesDto> saveEstudiante(@RequestBody EstudiantesDto estudiantesDto) {
         EstudiantesDto savedEstudianteDto = estudiantesService.save(estudiantesDto);
         return ResponseEntity.ok(savedEstudianteDto);
     }
-
+    
     @DeleteMapping("/deleteEstudiantes/{id}")
     @ResponseBody
     public ResponseEntity<String> deleteEstudiante(@PathVariable Integer id) {
         estudiantesService.delete(id);
-        return ResponseEntity.ok("Estudiante eliminado");
+        return ResponseEntity.ok("Estudiante eliminado correctamente");
     }
 }
 
