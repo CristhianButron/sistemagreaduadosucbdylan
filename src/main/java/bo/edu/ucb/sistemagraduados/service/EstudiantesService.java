@@ -1,0 +1,77 @@
+package bo.edu.ucb.sistemagraduados.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import bo.edu.ucb.sistemagraduados.dto.EstudiantesDto;
+import bo.edu.ucb.sistemagraduados.dto.PersonaDto;
+import bo.edu.ucb.sistemagraduados.entity.Estudiantes;
+import bo.edu.ucb.sistemagraduados.entity.Persona;
+import bo.edu.ucb.sistemagraduados.mapper.EstudiantesMapper;
+import bo.edu.ucb.sistemagraduados.mapper.PersonaMapper;
+import bo.edu.ucb.sistemagraduados.repository.EstudiantesRepository;
+import bo.edu.ucb.sistemagraduados.repository.PersonaRepository;
+import jakarta.persistence.EntityNotFoundException;
+
+@Service
+public class EstudiantesService {
+    @Autowired
+    private final EstudiantesRepository estudiantesRepository;
+
+    @Autowired
+    private final PersonaRepository personaRepository;
+
+    public EstudiantesService(EstudiantesRepository estudiantesRepository, PersonaRepository personaRepository) {
+        this.estudiantesRepository = estudiantesRepository;
+        this.personaRepository = personaRepository;
+    }
+
+    public List<EstudiantesDto> findAll() {
+        List<Estudiantes> estudiantes = estudiantesRepository.findAll();
+        return EstudiantesMapper.toEstudiantesDtoList(estudiantes);
+    }
+
+    public EstudiantesDto findById(Integer id) {
+        Estudiantes estudiante = estudiantesRepository.findById(id).orElse(null);
+        return EstudiantesMapper.toEstudiantesDto(estudiante);
+    }
+
+    public EstudiantesDto save(EstudiantesDto estudianteDto) {
+        // Crear y guardar la nueva Persona
+        PersonaDto personaDto = estudianteDto.getPersonaDto();
+        Persona persona = PersonaMapper.toPersona(personaDto);
+        persona = personaRepository.save(persona);
+
+        // Crear y guardar el nuevo Estudiante
+        Estudiantes estudiante = EstudiantesMapper.toEstudiantes(estudianteDto);
+        estudiante.setPersonaIdPersona(persona);
+        estudiante = estudiantesRepository.save(estudiante);
+
+        return EstudiantesMapper.toEstudiantesDto(estudiante);
+    }
+
+    public EstudiantesDto update(Integer id, EstudiantesDto estudianteActualizadoDto) {
+        // Buscar el estudiante existente por ID
+        Estudiantes estudianteExistente = estudiantesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Estudiante no encontrado"));
+
+        // Actualizar los campos del estudiante existente utilizando el mapper
+        Estudiantes estudianteActualizado = EstudiantesMapper.toEstudiantes(estudianteActualizadoDto);
+        estudianteActualizado.setIdEstudiante(estudianteExistente.getIdEstudiante()); // Asegurarse de mantener el mismo ID
+
+        // Guardar la entidad actualizada
+        estudiantesRepository.save(estudianteActualizado);
+
+        // Devolver el DTO del estudiante actualizado
+        return EstudiantesMapper.toEstudiantesDto(estudianteActualizado);
+    }
+
+    public void delete(Integer id) {
+        EstudiantesDto estudianteDto = findById(id);
+        PersonaDto personaDto = estudianteDto.getPersonaDto();
+        estudiantesRepository.deleteById(id);
+        personaRepository.deleteById(personaDto.getIdPersona());
+    }
+}
