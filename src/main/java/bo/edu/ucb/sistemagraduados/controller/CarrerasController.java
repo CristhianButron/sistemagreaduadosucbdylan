@@ -38,4 +38,16 @@ public class CarrerasController {
         CarrerasDto savedCarrerasDto = carrerasService.save(carrerasDto);
         return ResponseEntity.ok(savedCarrerasDto);
     }
+    
+    @PutMapping("/updateCarrera/{id}")
+    public ResponseEntity<CarrerasDto> updateCarrera(@PathVariable Integer id, @RequestBody CarrerasDto carrerasDto) {
+        CarrerasDto updatedCarrerasDto = carrerasService.update(id, carrerasDto);
+        return ResponseEntity.ok(updatedCarrerasDto);
+    }
+
+    @DeleteMapping("/deleteCarrera/{id}")
+    public ResponseEntity<String> deleteCarrera(@PathVariable Integer id) {
+        carrerasService.deleteById(id);
+        return ResponseEntity.ok("Carrera eliminada correctamente");
+    }
 }

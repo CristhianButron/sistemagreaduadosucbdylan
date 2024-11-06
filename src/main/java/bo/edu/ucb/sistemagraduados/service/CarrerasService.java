@@ -9,12 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import bo.edu.ucb.sistemagraduados.dto.CarrerasDto;
 import bo.edu.ucb.sistemagraduados.mapper.CarrerasMapper;
 import bo.edu.ucb.sistemagraduados.repository.CarrerasRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class CarrerasService {
     
     @Autowired
-    CarrerasRepository carrerasRepository;
+    private final CarrerasRepository carrerasRepository;
+
+    public CarrerasService(CarrerasRepository carrerasRepository) {
+        this.carrerasRepository = carrerasRepository;
+    }
 
     public CarrerasDto findById(Integer id) {
         Carreras carreras = carrerasRepository.findById(id).orElse(null);
@@ -32,5 +37,18 @@ public class CarrerasService {
         List<Carreras> carreras = carrerasRepository.findAll();
         return CarrerasMapper.toCarrerasDtoList(carreras);
         
+    }
+
+    public void deleteById(Integer id) {
+        carrerasRepository.deleteById(id);
+    }
+
+    @Transactional
+    public CarrerasDto update(Integer id, CarrerasDto carrerasDto) {
+        Carreras carreraExistente = carrerasRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("carrera no encontrada"));
+        Carreras carreraActualizada = CarrerasMapper.updateCarrerasFromDto(carrerasDto, carreraExistente);
+        carreraActualizada = carrerasRepository.save(carreraActualizada);
+        return CarrerasMapper.toCarrerasDto(carreraActualizada);
     }
 }

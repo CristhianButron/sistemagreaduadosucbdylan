@@ -16,10 +16,8 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -57,8 +55,7 @@ public class Persona implements Serializable {
     private String nombre;
     @Basic(optional = false)
     @Column(name = "fecha_nacimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     @Basic(optional = false)
     @Column(name = "ci")
     private String ci;
@@ -80,7 +77,7 @@ public class Persona implements Serializable {
         this.idPersona = idPersona;
     }
 
-    public Persona(Integer idPersona, String aPaterno, String aMaterno, String nombre, Date fechaNacimiento, String ci, String generoNacimiento, /*Object celular,*/ String nacionalidad) {
+    public Persona(Integer idPersona, String aPaterno, String aMaterno, String nombre, LocalDate fechaNacimiento, String ci, String generoNacimiento, /*Object celular,*/ String nacionalidad) {
         this.idPersona = idPersona;
         this.aPaterno = aPaterno;
         this.aMaterno = aMaterno;
@@ -123,11 +120,11 @@ public class Persona implements Serializable {
         this.nombre = nombre;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

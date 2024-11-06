@@ -1,6 +1,6 @@
 package bo.edu.ucb.sistemagraduados.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 
 public class EstudiosSuperioresDto {
     private Integer idEstudio;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private String institucion;
     private String pais;
     private String ciudad;

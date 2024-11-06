@@ -1,6 +1,6 @@
 package bo.edu.ucb.sistemagraduados.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,9 +16,9 @@ public class EstudiantesDto {
     private String linkedin;
     private Integer usuarioInsercion;
     private String fotoTitulo;
-    private Date fechaIngreso;
-    private Date fechaFin;
-    private Date fechaInsercion;
+    private LocalDate fechaIngreso;
+    private LocalDate fechaFin;
+    private LocalDate fechaInsercion;
     private Integer carrera_id_carrera;
     private PersonaDto personaDto;
     private Integer usuario_id_usuario;

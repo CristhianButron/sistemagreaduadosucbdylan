@@ -18,10 +18,8 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -61,16 +59,13 @@ public class Estudiantes implements Serializable {
     private String fotoTitulo;
     @Basic(optional = false)
     @Column(name = "fecha_ingreso")
-    @Temporal(TemporalType.DATE)
-    private Date fechaIngreso;
+    private LocalDate fechaIngreso;
     @Basic(optional = false)
     @Column(name = "fecha_fin")
-    @Temporal(TemporalType.DATE)
-    private Date fechaFin;
+    private LocalDate fechaFin;
     @Basic(optional = false)
     @Column(name = "fecha_insercion")
-    @Temporal(TemporalType.DATE)
-    private Date fechaInsercion;
+    private LocalDate fechaInsercion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiantesIdEstudiante", fetch = FetchType.LAZY)
     private List<EstudiosSuperiores> estudiosSuperioresList;
     @JoinColumn(name = "carreras_id_carrera", referencedColumnName = "id_carrera")
@@ -92,7 +87,7 @@ public class Estudiantes implements Serializable {
         this.idEstudiante = idEstudiante;
     }
 
-    public Estudiantes(Integer idEstudiante, int usuarioInsercion, Date fechaIngreso, Date fechaFin, Date fechaInsercion) {
+    public Estudiantes(Integer idEstudiante, int usuarioInsercion, LocalDate fechaIngreso, LocalDate fechaFin, LocalDate fechaInsercion) {
         this.idEstudiante = idEstudiante;
         this.usuarioInsercion = usuarioInsercion;
         this.fechaIngreso = fechaIngreso;
@@ -140,27 +135,27 @@ public class Estudiantes implements Serializable {
         this.fotoTitulo = fotoTitulo;
     }
 
-    public Date getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
-    public Date getFechaInsercion() {
+    public LocalDate getFechaInsercion() {
         return fechaInsercion;
     }
 
-    public void setFechaInsercion(Date fechaInsercion) {
+    public void setFechaInsercion(LocalDate fechaInsercion) {
         this.fechaInsercion = fechaInsercion;
     }
 

@@ -16,10 +16,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -46,12 +44,10 @@ public class EstudiosSuperiores implements Serializable {
     private Integer idEstudio;
     @Basic(optional = false)
     @Column(name = "fecha_inicio")
-    @Temporal(TemporalType.DATE)
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
     @Basic(optional = false)
     @Column(name = "fecha_fin")
-    @Temporal(TemporalType.DATE)
-    private Date fechaFin;
+    private LocalDate fechaFin;
     @Basic(optional = false)
     @Column(name = "institucion")
     private String institucion;
@@ -78,7 +74,7 @@ public class EstudiosSuperiores implements Serializable {
         this.idEstudio = idEstudio;
     }
 
-    public EstudiosSuperiores(Integer idEstudio, Date fechaInicio, Date fechaFin, String institucion, String pais, String ciudad, boolean activo) {
+    public EstudiosSuperiores(Integer idEstudio, LocalDate fechaInicio, LocalDate fechaFin, String institucion, String pais, String ciudad, boolean activo) {
         this.idEstudio = idEstudio;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -96,19 +92,19 @@ public class EstudiosSuperiores implements Serializable {
         this.idEstudio = idEstudio;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 

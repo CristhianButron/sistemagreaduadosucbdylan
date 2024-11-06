@@ -4,6 +4,7 @@ import bo.edu.ucb.sistemagraduados.entity.Carreras;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import bo.edu.ucb.sistemagraduados.dto.CarrerasDto;
 
@@ -28,5 +29,18 @@ public class CarrerasMapper {
             carrerasDtos.add(toCarrerasDto(carrera));
         }
         return carrerasDtos;
+    }
+
+    public static Carreras updateCarrerasFromDto (CarrerasDto carreraActualizadaDto, Carreras carreraExistente) {
+        if (carreraActualizadaDto == null || carreraExistente == null) {
+            return null;
+        }
+        if (carreraActualizadaDto.getNombre() != null && !Objects.equals(carreraActualizadaDto.getNombre(), carreraExistente.getNombre())) {
+            carreraExistente.setNombre(carreraActualizadaDto.getNombre());
+        }
+        if (carreraActualizadaDto.getSigla() != null && !Objects.equals(carreraActualizadaDto.getSigla(), carreraExistente.getSigla())) {
+            carreraExistente.setSigla(carreraActualizadaDto.getSigla());
+        }
+        return carreraExistente;
     }
 }

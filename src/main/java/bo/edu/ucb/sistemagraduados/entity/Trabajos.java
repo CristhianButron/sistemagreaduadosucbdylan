@@ -16,10 +16,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -48,11 +46,9 @@ public class Trabajos implements Serializable {
     private Integer idTrabajo;
     @Basic(optional = false)
     @Column(name = "fecha_inicio")
-    @Temporal(TemporalType.DATE)
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
     @Column(name = "fecha_fin")
-    @Temporal(TemporalType.DATE)
-    private Date fechaFin;
+    private LocalDate fechaFin;
     @Basic(optional = false)
     @Column(name = "cargo")
     private String cargo;
@@ -80,7 +76,7 @@ public class Trabajos implements Serializable {
         this.idTrabajo = idTrabajo;
     }
 
-    public Trabajos(Integer idTrabajo, Date fechaInicio, Date fechaFin, String cargo, String pais, String empresa, boolean activo) {
+    public Trabajos(Integer idTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String cargo, String pais, String empresa, boolean activo) {
         this.idTrabajo = idTrabajo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -98,19 +94,19 @@ public class Trabajos implements Serializable {
         this.idTrabajo = idTrabajo;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
