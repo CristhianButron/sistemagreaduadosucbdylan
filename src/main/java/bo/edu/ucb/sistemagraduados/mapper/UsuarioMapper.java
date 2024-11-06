@@ -43,4 +43,16 @@ public class UsuarioMapper {
         }
         return usuariosDtos;
     }
+
+    public static void updateUsuarioFromDto(UsuarioDto usuarioactualizadoDto, Usuario usuarioExistente) {
+        usuarioExistente.setCorreoInstitucional(usuarioactualizadoDto.getCorreoinstitucional());
+        usuarioExistente.setContrasenha(usuarioactualizadoDto.getContrasenha());
+        usuarioExistente.setCargo(usuarioactualizadoDto.getCargo());
+        
+        usuarioExistente.setPersonaIdPersona(PersonaMapper.toPersona(usuarioactualizadoDto.getPersonaDto()));
+
+        Carreras carrera = new Carreras();
+        carrera.setIdCarrera(usuarioactualizadoDto.getCarrera_id_carrera());
+        usuarioExistente.setCarrerasIdCarrera(carrera);
+    }
 }

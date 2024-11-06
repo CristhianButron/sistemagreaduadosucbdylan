@@ -48,7 +48,6 @@ public class EstudiantesMapper {
         usuario.setIdUsuario(estudiantesDto.getUsuario_id_usuario());
         estudiantes.setUsuarioIdUsuario(usuario);
         
-        estudiantes.setPersonaIdPersona(PersonaMapper.toPersona(estudiantesDto.getPersonaDto()));
 
         return estudiantes;
     }
@@ -59,5 +58,25 @@ public class EstudiantesMapper {
             estudiantesDtos.add(toEstudiantesDto(estudiante));
         }
         return estudiantesDtos;
+    }
+
+    public static void updateEstudianteFromDto(EstudiantesDto estudiantesDto, Estudiantes estudiantes) {
+        estudiantes.setCorreoPersonal(estudiantesDto.getCorreoPersonal());
+        estudiantes.setLinkedin(estudiantesDto.getLinkedin());
+        estudiantes.setUsuarioInsercion(estudiantesDto.getUsuarioInsercion());
+        estudiantes.setFotoTitulo(estudiantesDto.getFotoTitulo());
+        estudiantes.setFechaIngreso(estudiantesDto.getFechaIngreso());
+        estudiantes.setFechaFin(estudiantesDto.getFechaFin());
+        estudiantes.setFechaInsercion(estudiantesDto.getFechaInsercion());
+        estudiantes.setPersonaIdPersona(PersonaMapper.toPersona(estudiantesDto.getPersonaDto()));
+
+        Carreras carrera = new Carreras();
+        carrera.setIdCarrera(estudiantesDto.getCarrera_id_carrera());
+        estudiantes.setCarrerasIdCarrera(carrera);
+        
+        Usuario usuario = new Usuario();
+        usuario.setIdUsuario(estudiantesDto.getUsuario_id_usuario());
+        estudiantes.setUsuarioIdUsuario(usuario);
+        
     }
 }
