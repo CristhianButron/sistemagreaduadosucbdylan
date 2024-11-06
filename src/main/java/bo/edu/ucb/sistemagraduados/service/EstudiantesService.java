@@ -13,6 +13,8 @@ import bo.edu.ucb.sistemagraduados.mapper.EstudiantesMapper;
 import bo.edu.ucb.sistemagraduados.mapper.PersonaMapper;
 import bo.edu.ucb.sistemagraduados.repository.EstudiantesRepository;
 import bo.edu.ucb.sistemagraduados.repository.PersonaRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 @Service
 public class EstudiantesService {
@@ -48,6 +50,15 @@ public class EstudiantesService {
         estudiante = estudiantesRepository.save(estudiante);
 
         return EstudiantesMapper.toEstudiantesDto(estudiante);
+    }
+    
+    @Transactional
+    public EstudiantesDto update(Integer id, EstudiantesDto estudianteActualizadoDto) {
+        Estudiantes estudianteExistente = estudiantesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Estudiante no encontrado"));
+        Estudiantes estudianteActualizado = EstudiantesMapper.updateEstudiantesFromDto(estudianteActualizadoDto, estudianteExistente);
+        estudianteActualizado = estudiantesRepository.save(estudianteActualizado);
+        return EstudiantesMapper.toEstudiantesDto(estudianteActualizado);
     }
 
     public void delete(Integer id) {

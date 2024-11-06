@@ -35,6 +35,13 @@ public class EstudiantesController {
         EstudiantesDto savedEstudianteDto = estudiantesService.save(estudiantesDto);
         return ResponseEntity.ok(savedEstudianteDto);
     }
+
+    @PutMapping("/putEstudiantes/{id}")
+    @ResponseBody
+    public ResponseEntity<EstudiantesDto> updateEstudiante(@PathVariable Integer id, @RequestBody EstudiantesDto estudiantesDto) {
+        EstudiantesDto updatedEstudianteDto = estudiantesService.update(id, estudiantesDto);
+        return ResponseEntity.ok(updatedEstudianteDto);
+    }
     
     @DeleteMapping("/deleteEstudiantes/{id}")
     @ResponseBody

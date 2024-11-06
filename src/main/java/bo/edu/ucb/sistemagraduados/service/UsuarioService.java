@@ -13,6 +13,7 @@ import bo.edu.ucb.sistemagraduados.mapper.UsuarioMapper;
 import bo.edu.ucb.sistemagraduados.mapper.PersonaMapper;
 import bo.edu.ucb.sistemagraduados.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import bo.edu.ucb.sistemagraduados.repository.PersonaRepository;
 
 @Service
@@ -52,18 +53,14 @@ public class UsuarioService {
         return UsuarioMapper.toUsuarioDto(usuario);
     }
 
+    @Transactional
     public UsuarioDto update(Integer id, UsuarioDto usuarioactualizadoDto) {
         // Buscar el usuario existente por ID
         Usuario usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
-
         // Actualizar los campos del usuario existente utilizando el mapper
-        Usuario usuarioActualizado = UsuarioMapper.toUsuario(usuarioactualizadoDto);
-        usuarioActualizado.setIdUsuario(usuarioExistente.getIdUsuario()); // Asegurarse de mantener el mismo ID
-
-        // Guardar la entidad actualizada
-        usuarioRepository.save(usuarioActualizado);
-
+        Usuario usuarioActualizado = UsuarioMapper.updateUsuarioFromDto(usuarioactualizadoDto, usuarioExistente);
+        usuarioActualizado = usuarioRepository.save(usuarioActualizado);
         // Devolver el DTO del usuario actualizado
         return UsuarioMapper.toUsuarioDto(usuarioActualizado);
     }

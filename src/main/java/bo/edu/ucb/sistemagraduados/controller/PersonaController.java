@@ -28,4 +28,17 @@ public class PersonaController {
         PersonaDto savedPersonaDto = personaService.save(personaDto);
         return ResponseEntity.ok(savedPersonaDto);
     }
+
+    @PutMapping("/updatePersona/{id}")
+    public ResponseEntity<PersonaDto> updatePersona(@PathVariable Integer id, @RequestBody PersonaDto personaDto) {
+        PersonaDto updatedPersonaDto = personaService.update(id, personaDto);
+        return ResponseEntity.ok(updatedPersonaDto);
+    }
+
+
+    @DeleteMapping("/deletePersona/{id}")
+    public ResponseEntity<String> deletePersona(@PathVariable Integer id) {
+        personaService.deleteById(id);
+        return ResponseEntity.ok().body("Persona eliminada correctamente");
+    }
 }
