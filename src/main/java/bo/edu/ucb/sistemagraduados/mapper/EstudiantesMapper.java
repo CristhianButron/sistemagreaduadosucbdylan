@@ -15,26 +15,30 @@ public class EstudiantesMapper {
         EstudiantesDto estudiantesDto = new EstudiantesDto();
         estudiantesDto.setIdEstudiante(estudiantes.getIdEstudiante());
         estudiantesDto.setCorreoPersonal(estudiantes.getCorreoPersonal());
-        estudiantesDto.setLinkedin(estudiantes.getLinkedin());
-        estudiantesDto.setUsuarioInsercion(estudiantes.getUsuarioInsercion());
+        estudiantesDto.setCelular(estudiantes.getCelular());
+        estudiantesDto.setRedSocial(estudiantes.getRedSocial());   
+        estudiantesDto.setCiudadNacimiento(estudiantes.getCiudadNacimiento());
+        estudiantesDto.setTipoTitulacion(estudiantes.getTipoTitulacion());
         estudiantesDto.setFotoTitulo(estudiantes.getFotoTitulo());
         estudiantesDto.setFechaIngreso(estudiantes.getFechaIngreso());
         estudiantesDto.setFechaFin(estudiantes.getFechaFin());
         estudiantesDto.setFechaInsercion(estudiantes.getFechaInsercion());
-
-        estudiantesDto.setCarrera_id_carrera(estudiantes.getCarrerasIdCarrera().getIdCarrera());
         
         estudiantesDto.setPersonaDto(PersonaMapper.toPersonaDto(estudiantes.getPersonaIdPersona()));
         
         estudiantesDto.setUsuario_id_usuario(estudiantes.getUsuarioIdUsuario().getIdUsuario());
+
+        estudiantesDto.setCarrera_id_carrera(estudiantes.getCarrerasIdCarrera().getIdCarrera());
         return estudiantesDto;
     }
 
     public static Estudiantes toEstudiantes(EstudiantesDto estudiantesDto) {
         Estudiantes estudiantes = new Estudiantes();
         estudiantes.setCorreoPersonal(estudiantesDto.getCorreoPersonal());
-        estudiantes.setLinkedin(estudiantesDto.getLinkedin());
-        estudiantes.setUsuarioInsercion(estudiantesDto.getUsuarioInsercion());
+        estudiantes.setCelular(estudiantesDto.getCelular());
+        estudiantes.setRedSocial(estudiantesDto.getRedSocial());
+        estudiantes.setCiudadNacimiento(estudiantesDto.getCiudadNacimiento());
+        estudiantes.setTipoTitulacion(estudiantesDto.getTipoTitulacion());
         estudiantes.setFotoTitulo(estudiantesDto.getFotoTitulo());
         estudiantes.setFechaIngreso(estudiantesDto.getFechaIngreso());
         estudiantes.setFechaFin(estudiantesDto.getFechaFin());
@@ -68,11 +72,17 @@ public class EstudiantesMapper {
         if (estudianteActualizadoDto.getCorreoPersonal() != null && !Objects.equals(estudianteExistente.getCorreoPersonal(), estudianteActualizadoDto.getCorreoPersonal())) {
             estudianteExistente.setCorreoPersonal(estudianteActualizadoDto.getCorreoPersonal());
         }
-        if (estudianteActualizadoDto.getLinkedin() != null && !Objects.equals(estudianteExistente.getLinkedin(), estudianteActualizadoDto.getLinkedin())) {
-            estudianteExistente.setLinkedin(estudianteActualizadoDto.getLinkedin());
+        if (estudianteActualizadoDto.getCelular() != null && !Objects.equals(estudianteExistente.getCelular(), estudianteActualizadoDto.getCelular())) {
+            estudianteExistente.setCelular(estudianteActualizadoDto.getCelular());
         }
-        if (estudianteActualizadoDto.getUsuarioInsercion() != null && !Objects.equals(estudianteExistente.getUsuarioInsercion(), estudianteActualizadoDto.getUsuarioInsercion())) {
-            estudianteExistente.setUsuarioInsercion(estudianteActualizadoDto.getUsuarioInsercion());
+        if (estudianteActualizadoDto.getRedSocial() != null && !Objects.equals(estudianteExistente.getRedSocial(), estudianteActualizadoDto.getRedSocial())) {
+            estudianteExistente.setRedSocial(estudianteActualizadoDto.getRedSocial());
+        }
+        if (estudianteActualizadoDto.getCiudadNacimiento() != null && !Objects.equals(estudianteExistente.getCiudadNacimiento(), estudianteActualizadoDto.getCiudadNacimiento())) {
+            estudianteExistente.setCiudadNacimiento(estudianteActualizadoDto.getCiudadNacimiento());
+        }
+        if (estudianteActualizadoDto.getTipoTitulacion() != null && !Objects.equals(estudianteExistente.getTipoTitulacion(), estudianteActualizadoDto.getTipoTitulacion())) {
+            estudianteExistente.setTipoTitulacion(estudianteActualizadoDto.getTipoTitulacion());
         }
         if (estudianteActualizadoDto.getFotoTitulo() != null && !Objects.equals(estudianteExistente.getFotoTitulo(), estudianteActualizadoDto.getFotoTitulo())) {
             estudianteExistente.setFotoTitulo(estudianteActualizadoDto.getFotoTitulo());

@@ -32,7 +32,9 @@ import java.util.List;
     @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
     @NamedQuery(name = "Usuario.findByCorreoInstitucional", query = "SELECT u FROM Usuario u WHERE u.correoInstitucional = :correoInstitucional"),
     @NamedQuery(name = "Usuario.findByContrasenha", query = "SELECT u FROM Usuario u WHERE u.contrasenha = :contrasenha"),
-    @NamedQuery(name = "Usuario.findByCargo", query = "SELECT u FROM Usuario u WHERE u.cargo = :cargo")})
+    @NamedQuery(name = "Usuario.findByCargo", query = "SELECT u FROM Usuario u WHERE u.cargo = :cargo"),
+    @NamedQuery(name = "Usuario.findByAdmin", query = "SELECT u FROM Usuario u WHERE u.admin = :admin")})
+    
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +51,9 @@ public class Usuario implements Serializable {
     private String contrasenha;
     @Column(name = "cargo")
     private String cargo;
+    @Basic(optional = false)
+    @Column (name = "admin")
+    private Boolean admin;
     @JoinColumn(name = "carreras_id_carrera", referencedColumnName = "id_carrera")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Carreras carrerasIdCarrera;
@@ -101,6 +106,14 @@ public class Usuario implements Serializable {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 
     public Carreras getCarrerasIdCarrera() {

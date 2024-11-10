@@ -13,6 +13,7 @@ public class UsuarioDto {
     private String correoinstitucional;
     private String contrasenha;
     private String cargo;
+    private Boolean admin;
     private PersonaDto personaDto;
     private Integer carrera_id_carrera;
 }

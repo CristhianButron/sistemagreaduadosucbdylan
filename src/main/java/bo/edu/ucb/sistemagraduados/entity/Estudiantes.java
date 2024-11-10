@@ -33,8 +33,10 @@ import java.util.List;
     @NamedQuery(name = "Estudiantes.findAll", query = "SELECT e FROM Estudiantes e"),
     @NamedQuery(name = "Estudiantes.findByIdEstudiante", query = "SELECT e FROM Estudiantes e WHERE e.idEstudiante = :idEstudiante"),
     @NamedQuery(name = "Estudiantes.findByCorreoPersonal", query = "SELECT e FROM Estudiantes e WHERE e.correoPersonal = :correoPersonal"),
-    @NamedQuery(name = "Estudiantes.findByLinkedin", query = "SELECT e FROM Estudiantes e WHERE e.linkedin = :linkedin"),
-    @NamedQuery(name = "Estudiantes.findByUsuarioInsercion", query = "SELECT e FROM Estudiantes e WHERE e.usuarioInsercion = :usuarioInsercion"),
+    @NamedQuery(name = "Estudiantes.findByCelular", query = "SELECT e FROM Estudiantes e WHERE e.celular = :celular"),
+    @NamedQuery(name = "Estudiantes.findByRedSocial", query = "SELECT e FROM Estudiantes e WHERE e.redSocial = :redSocial"),
+    @NamedQuery(name = "Estudiantes.findByCiudadNacimiento", query = "SELECT e FROM Estudiantes e WHERE e.ciudadNacimiento = :ciudadNacimiento"),
+    @NamedQuery(name = "Estudiantes.findByTipoTitulacion", query = "SELECT e FROM Estudiantes e WHERE e.tipoTitulacion = :tipoTitulacion"),   
     @NamedQuery(name = "Estudiantes.findByFotoTitulo", query = "SELECT e FROM Estudiantes e WHERE e.fotoTitulo = :fotoTitulo"),
     @NamedQuery(name = "Estudiantes.findByFechaIngreso", query = "SELECT e FROM Estudiantes e WHERE e.fechaIngreso = :fechaIngreso"),
     @NamedQuery(name = "Estudiantes.findByFechaFin", query = "SELECT e FROM Estudiantes e WHERE e.fechaFin = :fechaFin"),
@@ -47,13 +49,20 @@ public class Estudiantes implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_estudiante")
     private Integer idEstudiante;
+    @Basic(optional = false)
     @Column(name = "correo_personal")
     private String correoPersonal;
-    @Column(name = "linkedin")
-    private String linkedin;
     @Basic(optional = false)
-    @Column(name = "usuario_insercion")
-    private Integer usuarioInsercion;
+    @Column(name = "celular")
+    private String celular;
+    @Column(name = "red_social")
+    private String redSocial;
+    @Basic(optional = false)
+    @Column(name = "ciudad_nacimiento")
+    private String ciudadNacimiento;
+    @Basic(optional = false)
+    @Column(name = "tipo_titulacion")
+    private String tipoTitulacion;
     @Basic(optional = false)
     @Column(name = "foto_titulo")
     private String fotoTitulo;
@@ -87,12 +96,19 @@ public class Estudiantes implements Serializable {
         this.idEstudiante = idEstudiante;
     }
 
-    public Estudiantes(Integer idEstudiante, int usuarioInsercion, LocalDate fechaIngreso, LocalDate fechaFin, LocalDate fechaInsercion) {
+    public Estudiantes(Integer idEstudiante, LocalDate fechaIngreso, LocalDate fechaFin, LocalDate fechaInsercion) {
         this.idEstudiante = idEstudiante;
-        this.usuarioInsercion = usuarioInsercion;
         this.fechaIngreso = fechaIngreso;
         this.fechaFin = fechaFin;
         this.fechaInsercion = fechaInsercion;
+    }
+
+    public Estudiantes(Integer idEstudiante, String correoPersonal, String celular, String redSocial, String ciudadNacimiento) {
+        this.idEstudiante = idEstudiante;
+        this.correoPersonal = correoPersonal;
+        this.celular = celular;
+        this.redSocial = redSocial;
+        this.ciudadNacimiento = ciudadNacimiento;
     }
 
     public Integer getIdEstudiante() {
@@ -111,20 +127,36 @@ public class Estudiantes implements Serializable {
         this.correoPersonal = correoPersonal;
     }
 
-    public String getLinkedin() {
-        return linkedin;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setLinkedin(String linkedin) {
-        this.linkedin = linkedin;
-    }
-  
-    public int getUsuarioInsercion() {
-        return usuarioInsercion;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
-    public void setUsuarioInsercion(int usuarioInsercion) {
-        this.usuarioInsercion = usuarioInsercion;
+    public String getRedSocial() {
+        return redSocial;
+    }
+
+    public void setRedSocial(String redSocial) {
+        this.redSocial = redSocial;
+    }
+
+    public String getCiudadNacimiento() {
+        return ciudadNacimiento;
+    }
+
+    public void setCiudadNacimiento(String ciudadNacimiento) {
+        this.ciudadNacimiento = ciudadNacimiento;
+    }
+
+    public String getTipoTitulacion() {
+        return tipoTitulacion;
+    }
+
+    public void setTipoTitulacion(String tipoTitulacion) {
+        this.tipoTitulacion = tipoTitulacion;
     }
 
     public String getFotoTitulo() {
@@ -209,7 +241,6 @@ public class Estudiantes implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Estudiantes)) {
             return false;
         }

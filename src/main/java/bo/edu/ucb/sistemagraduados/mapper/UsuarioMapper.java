@@ -15,6 +15,7 @@ public class UsuarioMapper {
         usuarioDto.setCorreoinstitucional(usuario.getCorreoInstitucional());
         usuarioDto.setContrasenha(usuario.getContrasenha());
         usuarioDto.setCargo(usuario.getCargo());
+        usuarioDto.setAdmin(usuario.getAdmin());
 
         usuarioDto.setPersonaDto(PersonaMapper.toPersonaDto(usuario.getPersonaIdPersona()));
 
@@ -27,6 +28,7 @@ public class UsuarioMapper {
         usuario.setCorreoInstitucional(usuarioDto.getCorreoinstitucional());
         usuario.setContrasenha(usuarioDto.getContrasenha());
         usuario.setCargo(usuarioDto.getCargo());
+        usuario.setAdmin(usuarioDto.getAdmin());
         
         usuario.setPersonaIdPersona(PersonaMapper.toPersona(usuarioDto.getPersonaDto()));
 
@@ -58,6 +60,9 @@ public class UsuarioMapper {
         }
         if (usuarioactualizadoDto.getCargo() != null && !Objects.equals(usuarioExistente.getCargo(), usuarioactualizadoDto.getCargo())) {
             usuarioExistente.setCargo(usuarioactualizadoDto.getCargo());
+        }
+        if (usuarioactualizadoDto.getAdmin() != null && !Objects.equals(usuarioExistente.getAdmin(), usuarioactualizadoDto.getAdmin())) {
+            usuarioExistente.setAdmin(usuarioactualizadoDto.getAdmin());
         }
         if (usuarioactualizadoDto.getPersonaDto() != null) {
             usuarioExistente.setPersonaIdPersona(PersonaMapper.updatePersonaFromDto(usuarioactualizadoDto.getPersonaDto(), usuarioExistente.getPersonaIdPersona()));

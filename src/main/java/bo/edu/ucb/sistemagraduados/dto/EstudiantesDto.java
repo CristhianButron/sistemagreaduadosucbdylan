@@ -13,14 +13,16 @@ import lombok.NoArgsConstructor;
 public class EstudiantesDto {
     private Integer idEstudiante;
     private String correoPersonal;
-    private String linkedin;
-    private Integer usuarioInsercion;
+    private String celular;
+    private String redSocial;
+    private String ciudadNacimiento;
+    private String tipoTitulacion;
     private String fotoTitulo;
     private LocalDate fechaIngreso;
     private LocalDate fechaFin;
     private LocalDate fechaInsercion;
-    private Integer carrera_id_carrera;
     private PersonaDto personaDto;
     private Integer usuario_id_usuario;
+    private Integer carrera_id_carrera;
 
 }

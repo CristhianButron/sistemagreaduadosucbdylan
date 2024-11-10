@@ -39,6 +39,16 @@ public class CarrerasService {
         
     }
 
+    public CarrerasDto findByNombre(String nombre) {
+        Carreras carreras = carrerasRepository.findByNombre(nombre);
+        return CarrerasMapper.toCarrerasDto(carreras);
+    }
+
+    public CarrerasDto findBySigla(String sigla) {
+        Carreras carreras = carrerasRepository.findBySigla(sigla);
+        return CarrerasMapper.toCarrerasDto(carreras);
+    }
+
     public void deleteById(Integer id) {
         carrerasRepository.deleteById(id);
     }

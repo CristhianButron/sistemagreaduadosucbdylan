@@ -6,4 +6,6 @@ import bo.edu.ucb.sistemagraduados.entity.Carreras;
 
 @Repository
 public interface CarrerasRepository extends JpaRepository<Carreras, Integer> {
+    Carreras findByNombre(String nombre);
+    Carreras findBySigla(String sigla);
 }
