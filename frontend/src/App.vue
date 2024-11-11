@@ -1,26 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <DataManager />
+  <mainFrame />
 </template>
 
 <script>
-import DataManager from "../src/components/dataManager.vue";
+import mainFrame from "../src/views/graduados/mainFrame.vue";
 
 export default {
   name: "App",
   components: {
-    DataManager,
+    mainFrame,
   },
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
