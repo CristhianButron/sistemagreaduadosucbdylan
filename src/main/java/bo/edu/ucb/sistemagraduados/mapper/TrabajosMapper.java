@@ -43,12 +43,12 @@ public class TrabajosMapper {
         return trabajos;
     }
 
-    public static List<TrabajosDto> toTrabajosDtoList(List<Trabajos> trabajosList) {
-        List<TrabajosDto> trabajosDtoList = new ArrayList<>();
-        for (Trabajos trabajos : trabajosList) {
-            trabajosDtoList.add(toTrabajosDto(trabajos));
+    public static List<TrabajosDto> toTrabajosDtoList(List<Trabajos> trabajos) {
+        List<TrabajosDto> trabajosDtos = new ArrayList<>();
+        for (Trabajos trabajo : trabajos) {
+            trabajosDtos.add(toTrabajosDto(trabajo));
         }
-        return trabajosDtoList;
+        return trabajosDtos;
     }
 
     public static Trabajos updateTrabajosFromDto(TrabajosDto trabajosDto, Trabajos trabajosExistente) {

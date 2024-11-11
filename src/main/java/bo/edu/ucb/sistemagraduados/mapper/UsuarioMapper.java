@@ -61,7 +61,7 @@ public class UsuarioMapper {
         if (usuarioactualizadoDto.getCargo() != null && !Objects.equals(usuarioExistente.getCargo(), usuarioactualizadoDto.getCargo())) {
             usuarioExistente.setCargo(usuarioactualizadoDto.getCargo());
         }
-        if (usuarioactualizadoDto.getAdmin() != null && !Objects.equals(usuarioExistente.getAdmin(), usuarioactualizadoDto.getAdmin())) {
+        if (usuarioactualizadoDto.getAdmin() != usuarioExistente.getAdmin()) {
             usuarioExistente.setAdmin(usuarioactualizadoDto.getAdmin());
         }
         if (usuarioactualizadoDto.getPersonaDto() != null) {
