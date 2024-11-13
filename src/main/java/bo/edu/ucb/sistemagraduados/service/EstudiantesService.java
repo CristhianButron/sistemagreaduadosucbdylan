@@ -69,11 +69,15 @@ public class EstudiantesService {
         personaRepository.deleteById(personaDto.getIdPersona());
     }
 
-    public List<EstudiantesDto> findByFechasBetween(LocalDate fechaInicio, LocalDate fechaFin) {
-        List<Estudiantes> estudiantes = estudiantesRepository.findByFechasBetween(fechaInicio, fechaFin);
+    public List<EstudiantesDto> findByFechasIngresoBetween(LocalDate fechaInicio, LocalDate fechaFin) {
+        List<Estudiantes> estudiantes = estudiantesRepository.findByFechasIngresoBetween(fechaInicio, fechaFin);
         return EstudiantesMapper.toEstudiantesDtoList(estudiantes);
     }
 
+    public List<EstudiantesDto> findByFechasFinBetween(LocalDate fechaInicio, LocalDate fechaFin) {
+        List<Estudiantes> estudiantes = estudiantesRepository.findByFechasFinBetween(fechaInicio, fechaFin);
+        return EstudiantesMapper.toEstudiantesDtoList(estudiantes);
+    }
     // public EstudiantesDto findByCi(String ci) {
     //     Estudiantes estudiante = estudiantesRepository.findByPersonaCi(ci);
     //     return EstudiantesMapper.toEstudiantesDto(estudiante);

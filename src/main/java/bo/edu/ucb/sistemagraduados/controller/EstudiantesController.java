@@ -51,10 +51,16 @@ public class EstudiantesController {
         return ResponseEntity.ok("Estudiante eliminado correctamente");
     }
 
-    @GetMapping ("/getEstudiantesByFechas/{FechaInicio}/{FechaFin}")
+    @GetMapping ("/getEstudiantesByFechasIngreso/{FechaInicio}/{FechaFin}")
     @ResponseBody
     public List<EstudiantesDto> getEstudiantesByFechas(@PathVariable LocalDate FechaInicio, @PathVariable LocalDate FechaFin) {
-        return estudiantesService.findByFechasBetween(FechaInicio, FechaFin);
+        return estudiantesService.findByFechasIngresoBetween(FechaInicio, FechaFin);
+    }
+
+    @GetMapping ("/getEstudiantesByFechasFin/{FechaInicio}/{FechaFin}")
+    @ResponseBody
+    public List<EstudiantesDto> getEstudiantesByFechasFin(@PathVariable LocalDate FechaInicio, @PathVariable LocalDate FechaFin) {
+        return estudiantesService.findByFechasFinBetween(FechaInicio, FechaFin);
     }
 
 }
