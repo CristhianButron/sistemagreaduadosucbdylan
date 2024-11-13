@@ -3,6 +3,7 @@ package bo.edu.ucb.sistemagraduados.controller;
 import bo.edu.ucb.sistemagraduados.dto.EstudiantesDto;
 import bo.edu.ucb.sistemagraduados.service.EstudiantesService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,12 @@ public class EstudiantesController {
         estudiantesService.delete(id);
         return ResponseEntity.ok("Estudiante eliminado correctamente");
     }
+
+    @GetMapping ("/getEstudiantesByFechas/{FechaInicio}/{FechaFin}")
+    @ResponseBody
+    public List<EstudiantesDto> getEstudiantesByFechas(@PathVariable LocalDate FechaInicio, @PathVariable LocalDate FechaFin) {
+        return estudiantesService.findByFechasBetween(FechaInicio, FechaFin);
+    }
+
 }
 

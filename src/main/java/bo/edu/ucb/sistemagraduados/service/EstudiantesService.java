@@ -1,5 +1,6 @@
 package bo.edu.ucb.sistemagraduados.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,4 +68,14 @@ public class EstudiantesService {
         estudiantesRepository.deleteById(id);
         personaRepository.deleteById(personaDto.getIdPersona());
     }
+
+    public List<EstudiantesDto> findByFechasBetween(LocalDate fechaInicio, LocalDate fechaFin) {
+        List<Estudiantes> estudiantes = estudiantesRepository.findByFechasBetween(fechaInicio, fechaFin);
+        return EstudiantesMapper.toEstudiantesDtoList(estudiantes);
+    }
+
+    // public EstudiantesDto findByCi(String ci) {
+    //     Estudiantes estudiante = estudiantesRepository.findByPersonaCi(ci);
+    //     return EstudiantesMapper.toEstudiantesDto(estudiante);
+    // }
 }

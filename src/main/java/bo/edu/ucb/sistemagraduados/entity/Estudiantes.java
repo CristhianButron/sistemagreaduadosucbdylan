@@ -40,7 +40,8 @@ import java.util.List;
     @NamedQuery(name = "Estudiantes.findByFotoTitulo", query = "SELECT e FROM Estudiantes e WHERE e.fotoTitulo = :fotoTitulo"),
     @NamedQuery(name = "Estudiantes.findByFechaIngreso", query = "SELECT e FROM Estudiantes e WHERE e.fechaIngreso = :fechaIngreso"),
     @NamedQuery(name = "Estudiantes.findByFechaFin", query = "SELECT e FROM Estudiantes e WHERE e.fechaFin = :fechaFin"),
-    @NamedQuery(name = "Estudiantes.findByFechaInsercion", query = "SELECT e FROM Estudiantes e WHERE e.fechaInsercion = :fechaInsercion")})
+    @NamedQuery(name = "Estudiantes.findByFechaInsercion", query = "SELECT e FROM Estudiantes e WHERE e.fechaInsercion = :fechaInsercion"),
+    @NamedQuery(name = "Estudiantes.findByFechasBetween", query = "SELECT e FROM Estudiantes e WHERE e.fechaIngreso BETWEEN :fechaInicio AND :fechaFin")})
 public class Estudiantes implements Serializable {
 
     private static final long serialVersionUID = 1L;
