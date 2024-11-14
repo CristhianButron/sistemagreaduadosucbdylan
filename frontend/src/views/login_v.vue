@@ -31,13 +31,7 @@ export default {
     async login() {
       const requestHandler = new RequestHandler();
       try {
-        console.log("Iniciando el proceso de autenticación...");
-        
-        // Obtener lista de usuarios del endpoint
         const usuarios = await requestHandler.getRequest("/usuario/getUsuarios");
-        console.log("Usuarios obtenidos:", usuarios);
-
-        // Buscar el usuario con email y contraseña proporcionados
         const usuario = usuarios.find(
           (user) =>
             user.correoinstitucional === this.email &&
@@ -45,29 +39,21 @@ export default {
         );
 
         if (usuario) {
-          console.log("Usuario autenticado:", usuario);
-
           // Guardar el rol del usuario en localStorage
           localStorage.setItem("user", JSON.stringify({ admin: usuario.admin }));
-          console.log("Información de usuario guardada en localStorage:", localStorage.getItem("user"));
 
-          // Redirigir a la pantalla principal (MainFrame.vue)
-          console.log("Intentando redireccionar a MainFrame...");
-          this.$router.push({ name: "MainFrame" });
+          // Llama al método de autenticación de App.vue
+          this.$emit("authenticated");
         } else {
-          // Mostrar mensaje de error si las credenciales no coinciden
           this.message = "Correo o contraseña incorrectos";
-          console.log("Error: Credenciales incorrectas");
         }
       } catch (error) {
         this.message = "Error al conectar con el servidor. Intente nuevamente.";
-        console.error("Error en la conexión o en la solicitud:", error);
       }
     },
   },
 };
 </script>
-
 
 
 <style scoped>

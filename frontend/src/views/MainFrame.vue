@@ -1,11 +1,16 @@
 <template>
-  <div class="dashboard">
-    <BoxComponent title="Inicio" :isAdmin="isAdmin" route="/inicio" />
-    <BoxComponent title="Graduados" :isAdmin="isAdmin" adminOnly route="/graduados" />
-    <BoxComponent title="Usuarios" :isAdmin="isAdmin" route="/usuarios" />
-    <BoxComponent title="Carreras" :isAdmin="isAdmin" route="/carreras" />
-    <BoxComponent title="Trabajos" :isAdmin="isAdmin" adminOnly route="/trabajos" />
-    <BoxComponent title="Descarga datos" :isAdmin="isAdmin" route="/descarga-datos" />
+  <div>
+    <div class="logout-button">
+      <button @click="logout">Cerrar Sesión</button>
+    </div>
+    <div class="dashboard">
+      <BoxComponent title="Inicio" :isAdmin="isAdmin" route="/inicio" />
+      <BoxComponent title="Graduados" :isAdmin="isAdmin" adminOnly route="/graduados" />
+      <BoxComponent title="Usuarios" :isAdmin="isAdmin" route="/usuarios" />
+      <BoxComponent title="Carreras" :isAdmin="isAdmin" route="/carreras" />
+      <BoxComponent title="Trabajos" :isAdmin="isAdmin" adminOnly route="/trabajos" />
+      <BoxComponent title="Descarga datos" :isAdmin="isAdmin" route="/descarga-datos" />
+    </div>
   </div>
 </template>
 
@@ -16,10 +21,23 @@ export default {
   components: {
     BoxComponent,
   },
+  name: "MainFrame",
   data() {
     return {
       isAdmin: JSON.parse(localStorage.getItem("user"))?.admin || false, // Determina si es admin o no
     };
+  },
+  methods: {
+    logout() {
+      // Limpiar el localStorage para eliminar datos de autenticación
+      localStorage.removeItem("user");
+
+      // Emitir un evento al componente principal para actualizar el estado de autenticación
+      this.$emit("logout");
+
+      // Opcional: Redirigir manualmente al inicio de sesión si no se maneja desde App.vue
+      this.$router.push({ name: "Login" });
+    },
   },
 };
 </script>
@@ -32,5 +50,26 @@ export default {
   max-width: 800px;
   margin: auto;
   padding: 20px;
+}
+
+.logout-button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.logout-button button {
+  padding: 8px 16px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button button:hover {
+  background-color: #c0392b;
 }
 </style>

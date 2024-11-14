@@ -1,7 +1,7 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router';
 import Login from '../views/login_v.vue';
-import MainFrame from '../views/MainFrame.vue';
+import MainFrame from '@/views/MainFrame.vue';
 
 const routes = [
   {
@@ -24,14 +24,17 @@ const router = createRouter({
   routes,
 });
 
-// Guard de navegación para verificar autenticación
 router.beforeEach((to, from, next) => {
   const isAuthenticated = !!localStorage.getItem('user');
+  console.log("Guard de navegación: Ruta de destino:", to.name, "Autenticado:", isAuthenticated);
+
   if (to.matched.some((record) => record.meta.requiresAuth) && !isAuthenticated) {
     next({ name: 'Login' });
   } else {
     next();
   }
 });
+
+
 
 export default router;
