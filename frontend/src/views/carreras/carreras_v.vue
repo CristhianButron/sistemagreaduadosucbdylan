@@ -22,6 +22,7 @@
 import { RequestHandler } from "../../services/RequestHandler";
 
 export default {
+  name: "Carreras_v",
   data() {
     return {
       race: {

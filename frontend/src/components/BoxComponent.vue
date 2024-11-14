@@ -29,6 +29,7 @@ export default {
   methods: {
     navigate() {
       this.$router.push(this.route);
+      
     },
   },
 };

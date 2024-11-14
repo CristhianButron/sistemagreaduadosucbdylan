@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Login from '../views/login_v.vue';
 import MainFrame from '@/views/MainFrame.vue';
+import carreras_v from '@/views/carreras/carreras_v.vue';
 
 const routes = [
   {
@@ -17,10 +18,18 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: '/carreras',
+    name: 'Carreras_v',
+    component: carreras_v, // Ruta para carreras_v.vue
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = createRouter({
-  
+
   history: createWebHistory(),
   routes,
 });

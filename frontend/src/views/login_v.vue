@@ -39,10 +39,9 @@ export default {
         );
 
         if (usuario) {
-          // Guardar el rol del usuario en localStorage
+         //guardado de rol
           localStorage.setItem("user", JSON.stringify({ admin: usuario.admin }));
 
-          // Llama al método de autenticación de App.vue
           this.$emit("authenticated");
         } else {
           this.message = "Correo o contraseña incorrectos";

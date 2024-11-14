@@ -7,7 +7,7 @@
       <BoxComponent title="Inicio" :isAdmin="isAdmin" route="/inicio" />
       <BoxComponent title="Graduados" :isAdmin="isAdmin" adminOnly route="/graduados" />
       <BoxComponent title="Usuarios" :isAdmin="isAdmin" route="/usuarios" />
-      <BoxComponent title="Carreras" :isAdmin="isAdmin" route="/carreras" />
+      <BoxComponent title="Carreras" :isAdmin="isAdmin" route="/carreras" /> 
       <BoxComponent title="Trabajos" :isAdmin="isAdmin" adminOnly route="/trabajos" />
       <BoxComponent title="Descarga datos" :isAdmin="isAdmin" route="/descarga-datos" />
     </div>
@@ -24,18 +24,18 @@ export default {
   name: "MainFrame",
   data() {
     return {
-      isAdmin: JSON.parse(localStorage.getItem("user"))?.admin || false, // Determina si es admin o no
+      isAdmin: JSON.parse(localStorage.getItem("user"))?.admin || false, 
     };
   },
   methods: {
     logout() {
-      // Limpiar el localStorage para eliminar datos de autenticación
+      // Limpia memoria
       localStorage.removeItem("user");
 
-      // Emitir un evento al componente principal para actualizar el estado de autenticación
+      
       this.$emit("logout");
 
-      // Opcional: Redirigir manualmente al inicio de sesión si no se maneja desde App.vue
+    
       this.$router.push({ name: "Login" });
     },
   },
