@@ -1,25 +1,11 @@
 <template>
   <div class="dashboard">
     <BoxComponent title="Inicio" :isAdmin="isAdmin" route="/inicio" />
-    <BoxComponent
-      title="Graduados"
-      :isAdmin="isAdmin"
-      adminOnly
-      route="/graduados"
-    />
+    <BoxComponent title="Graduados" :isAdmin="isAdmin" adminOnly route="/graduados" />
     <BoxComponent title="Usuarios" :isAdmin="isAdmin" route="/usuarios" />
     <BoxComponent title="Carreras" :isAdmin="isAdmin" route="/carreras" />
-    <BoxComponent
-      title="Trabajos"
-      :isAdmin="isAdmin"
-      adminOnly
-      route="/trabajos"
-    />
-    <BoxComponent
-      title="Descarga datos"
-      :isAdmin="isAdmin"
-      route="/descarga-datos"
-    />
+    <BoxComponent title="Trabajos" :isAdmin="isAdmin" adminOnly route="/trabajos" />
+    <BoxComponent title="Descarga datos" :isAdmin="isAdmin" route="/descarga-datos" />
   </div>
 </template>
 
@@ -32,7 +18,7 @@ export default {
   },
   data() {
     return {
-      isAdmin: true, // Cambiar a false para probar con un usuario estándar
+      isAdmin: JSON.parse(localStorage.getItem("user"))?.admin || false, // Determina si es admin o no
     };
   },
 };

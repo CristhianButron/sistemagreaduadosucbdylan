@@ -12,9 +12,7 @@
       </div>
       <button type="submit" class="login-button">Iniciar Sesión</button>
     </form>
-    <p v-if="message" :class="{ admin: isAdmin, user: !isAdmin }">
-      {{ message }}
-    </p>
+    <p v-if="message" :class="{ admin: isAdmin, user: !isAdmin }">{{ message }}</p>
   </div>
 </template>
 
@@ -27,43 +25,50 @@ export default {
       email: "",
       password: "",
       message: "",
-      isAdmin: false,
     };
   },
   methods: {
     async login() {
       const requestHandler = new RequestHandler();
+      try {
+        console.log("Iniciando el proceso de autenticación...");
+        
+        // Obtener lista de usuarios del endpoint
+        const usuarios = await requestHandler.getRequest("/usuario/getUsuarios");
+        console.log("Usuarios obtenidos:", usuarios);
 
-      const usuarios = await requestHandler.getRequest("/usuario/getUsuarios");
-      const usuario = usuarios.find(
-        (user) =>
-          user.correoinstitucional === this.email &&
-          user.contrasenha === this.password
-      );
+        // Buscar el usuario con email y contraseña proporcionados
+        const usuario = usuarios.find(
+          (user) =>
+            user.correoinstitucional === this.email &&
+            user.contrasenha === this.password
+        );
 
-      if (usuario) {
-        this.isAdmin = usuario.admin;
-        this.message = this.isAdmin
-          ? "Inicio de sesión exitoso: Administrador"
-          : "Inicio de sesión exitoso: Usuario estándar";
+        if (usuario) {
+          console.log("Usuario autenticado:", usuario);
 
-        // Guardar usuario en localStorage para autentificación
-        localStorage.setItem("user", JSON.stringify(usuario));
+          // Guardar el rol del usuario en localStorage
+          localStorage.setItem("user", JSON.stringify({ admin: usuario.admin }));
+          console.log("Información de usuario guardada en localStorage:", localStorage.getItem("user"));
 
-        // Redirigir según el rol
-        if (this.isAdmin) {
-          this.$router.push({ name: "Dashboard" });
+          // Redirigir a la pantalla principal (MainFrame.vue)
+          console.log("Intentando redireccionar a MainFrame...");
+          this.$router.push({ name: "MainFrame" });
         } else {
-          this.$router.push({ name: "Dashboard" });
+          // Mostrar mensaje de error si las credenciales no coinciden
+          this.message = "Correo o contraseña incorrectos";
+          console.log("Error: Credenciales incorrectas");
         }
-      } else {
-        this.message = "Correo o contraseña incorrectos";
-        this.isAdmin = false;
+      } catch (error) {
+        this.message = "Error al conectar con el servidor. Intente nuevamente.";
+        console.error("Error en la conexión o en la solicitud:", error);
       }
     },
   },
 };
 </script>
+
+
 
 <style scoped>
 .login-container {

@@ -1,18 +1,21 @@
 // src/router/index.js
-import { createRouter, createWebHistory } from "vue-router";
-import Login from "../views/login_v.vue";
-import Dashboard from "../views/MainFrame.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import Login from '../views/login_v.vue';
+import MainFrame from '../views/MainFrame.vue';
 
 const routes = [
   {
-    path: "/",
-    name: "Login",
+    path: '/',
+    name: 'Login',
     component: Login,
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
+    path: '/main',
+    name: 'MainFrame',
+    component: MainFrame,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 
@@ -21,21 +24,11 @@ const router = createRouter({
   routes,
 });
 
-// Guard de navegación para verificar autenticación y rol
+// Guard de navegación para verificar autenticación
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = !!localStorage.getItem("user");
-  const user = isAuthenticated
-    ? JSON.parse(localStorage.getItem("user"))
-    : null;
-
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!isAuthenticated) {
-      next({ name: "Login" });
-    } else if (to.name === "Dashboard" && user && !user.admin) {
-      next({ name: "NotAuthorized" });
-    } else {
-      next();
-    }
+  const isAuthenticated = !!localStorage.getItem('user');
+  if (to.matched.some((record) => record.meta.requiresAuth) && !isAuthenticated) {
+    next({ name: 'Login' });
   } else {
     next();
   }
