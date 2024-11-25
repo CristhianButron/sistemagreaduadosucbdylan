@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import bo.edu.ucb.sistemagraduados.dto.UsuarioDto;
 import bo.edu.ucb.sistemagraduados.entity.Carreras;
 import bo.edu.ucb.sistemagraduados.entity.Usuario;
+import bo.edu.ucb.sistemagraduados.utility.HashingUtility;
 
 public class UsuarioMapper {
+    private static HashingUtility hashingUtility = new HashingUtility();
+
     public static UsuarioDto toUsuarioDto(Usuario usuario) {
         UsuarioDto usuarioDto = new UsuarioDto();
         usuarioDto.setIdUsuario(usuario.getIdUsuario());
@@ -26,7 +29,10 @@ public class UsuarioMapper {
     public static Usuario toUsuario(UsuarioDto usuarioDto) {
         Usuario usuario = new Usuario();
         usuario.setCorreoInstitucional(usuarioDto.getCorreoinstitucional());
-        usuario.setContrasenha(usuarioDto.getContrasenha());
+
+        String hashedPassword = hashingUtility.hashPassword(usuarioDto.getContrasenha());
+        usuario.setContrasenha(hashedPassword);
+        
         usuario.setCargo(usuarioDto.getCargo());
         usuario.setAdmin(usuarioDto.getAdmin());
         
