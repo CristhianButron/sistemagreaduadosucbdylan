@@ -35,6 +35,10 @@ public class EstudiantesService {
         return EstudiantesMapper.toEstudiantesDtoList(estudiantes);
     }
 
+    public Long countEstudiantes(){
+        return estudiantesRepository.count();
+    }
+
     public EstudiantesDto findById(Integer id) {
         Estudiantes estudiante = estudiantesRepository.findById(id).orElse(null);
         return EstudiantesMapper.toEstudiantesDto(estudiante);

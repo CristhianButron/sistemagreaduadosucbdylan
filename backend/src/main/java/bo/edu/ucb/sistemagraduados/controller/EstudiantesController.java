@@ -63,5 +63,11 @@ public class EstudiantesController {
         return estudiantesService.findByFechasFinBetween(FechaInicio, FechaFin);
     }
 
+    @GetMapping("/getContadorEstudiantes")
+    public ResponseEntity<Long> getContadorEstudiantes() {
+        Long count = estudiantesService.countEstudiantes();
+        return ResponseEntity.ok(count);
+    }
+
 }
 
