@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import bo.edu.ucb.sistemagraduados.exception.CustomException;
 import bo.edu.ucb.sistemagraduados.dto.UsuarioDto;
 import bo.edu.ucb.sistemagraduados.dto.PersonaDto;
 import bo.edu.ucb.sistemagraduados.entity.Usuario;
@@ -40,7 +40,21 @@ public class UsuarioService {
         return UsuarioMapper.toUsuarioDto(usuario);
     }
 
+    public UsuarioDto findByCorreoInstitucional(String correoInstitucional) {
+        Usuario usuario = usuarioRepository.findByCorreoInstitucional(correoInstitucional);
+        return usuario != null ? UsuarioMapper.toUsuarioDto(usuario) : null;
+    }
+
     public UsuarioDto save(UsuarioDto usuarioDto) {
+         if (usuarioRepository.findByCorreoInstitucional(usuarioDto.getCorreoinstitucional()) != null) {
+            throw new CustomException("El correo electrónico ya está registrado");
+        }
+
+        // Verificar si la persona ya está registrada (por CI por ejemplo)
+        if (usuarioDto.getPersonaDto() != null && 
+            usuarioRepository.existsByPersonaIdPersonaCi(usuarioDto.getPersonaDto().getCi())) {
+            throw new CustomException("Esta persona ya está registrada en el sistema");
+        }
         // Crear y guardar la nueva Persona
         PersonaDto personaDto = usuarioDto.getPersonaDto();
         Persona persona = PersonaMapper.toPersona(personaDto);

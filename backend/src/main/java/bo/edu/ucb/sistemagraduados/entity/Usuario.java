@@ -54,8 +54,8 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column (name = "admin")
     private Boolean admin;
-    @JoinColumn(name = "carreras_id_carrera", referencedColumnName = "id_carrera")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "carreras_id_carrera", referencedColumnName = "id_carrera", nullable = true)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Carreras carrerasIdCarrera;
     @JoinColumn(name = "persona_id_persona", referencedColumnName = "id_persona")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

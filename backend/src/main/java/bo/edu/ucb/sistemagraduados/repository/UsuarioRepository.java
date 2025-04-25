@@ -6,5 +6,7 @@ import bo.edu.ucb.sistemagraduados.entity.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-
+    Usuario findByCorreoInstitucional(String correoInstitucional);
+    boolean existsByPersonaIdPersonaCi(String ci);
+    boolean existsByCorreoInstitucional(String correoInstitucional);
 }

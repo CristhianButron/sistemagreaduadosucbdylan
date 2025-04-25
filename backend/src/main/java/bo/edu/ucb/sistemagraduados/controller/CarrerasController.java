@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/api/v1/carreras")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "Bearer Authentication")
 public class CarrerasController {
 
     @Autowired

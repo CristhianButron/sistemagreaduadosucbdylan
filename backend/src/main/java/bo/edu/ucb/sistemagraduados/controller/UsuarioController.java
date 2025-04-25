@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/api/v1/usuario")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "Bearer Authentication")  // Add this annotation
 public class UsuarioController {
 
     @Autowired

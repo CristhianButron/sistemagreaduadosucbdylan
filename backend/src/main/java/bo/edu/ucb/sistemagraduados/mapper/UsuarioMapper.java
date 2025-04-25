@@ -16,10 +16,12 @@ public class UsuarioMapper {
         usuarioDto.setContrasenha(usuario.getContrasenha());
         usuarioDto.setCargo(usuario.getCargo());
         usuarioDto.setAdmin(usuario.getAdmin());
-
         usuarioDto.setPersonaDto(PersonaMapper.toPersonaDto(usuario.getPersonaIdPersona()));
-
-        usuarioDto.setCarrera_id_carrera(usuario.getCarrerasIdCarrera().getIdCarrera());
+        
+        // Handle null carrera
+        if (usuario.getCarrerasIdCarrera() != null) {
+            usuarioDto.setCarrera_id_carrera(usuario.getCarrerasIdCarrera().getIdCarrera());
+        }
         return usuarioDto;
     }
 
@@ -29,12 +31,16 @@ public class UsuarioMapper {
         usuario.setContrasenha(usuarioDto.getContrasenha());
         usuario.setCargo(usuarioDto.getCargo());
         usuario.setAdmin(usuarioDto.getAdmin());
-        
         usuario.setPersonaIdPersona(PersonaMapper.toPersona(usuarioDto.getPersonaDto()));
-
-        Carreras carrera = new Carreras();
-        carrera.setIdCarrera(usuarioDto.getCarrera_id_carrera());
-        usuario.setCarrerasIdCarrera(carrera);
+    
+        // Only set carrera if id is not null
+        if (usuarioDto.getCarrera_id_carrera() != null) {
+            Carreras carrera = new Carreras();
+            carrera.setIdCarrera(usuarioDto.getCarrera_id_carrera());
+            usuario.setCarrerasIdCarrera(carrera);
+        } else {
+            usuario.setCarrerasIdCarrera(null);  // Explicitly set null if no carrera
+        }
         
         return usuario;
     }

@@ -20,9 +20,12 @@ import bo.edu.ucb.sistemagraduados.service.TrabajosService;
 
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/api/v1/trabajos")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "Bearer Authentication")
 public class TrabajosController {
 
     @Autowired
