@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
                 description = "API for Sistema Graduados UCB"
         ),
         servers = {
-                @Server(url = "http://localhost:8080", description = "Local server")
+                @Server(url = "https://sistemagraduados-latest.onrender.com", description = "Deploy server")
         }
 )
 @SecurityScheme(
